@@ -26,7 +26,7 @@ const PublicationProvider = ({ children }) => {
         }
     };
     useEffect(() => {
-          fetchPublications();
+        fetchPublications();
     }, [token]);
 
     const addPublication = async (newPub) => {
@@ -51,8 +51,15 @@ const PublicationProvider = ({ children }) => {
         }
     };
 
-    const deletePublication = (id) => {
-        setPublications(prev => prev.filter(pub => pub.id !== id));
+    const deletePublication = async (id) => {
+        try {
+            await publicationService.deletePublication(id, token); // kirim token juga kalau backend butuh
+            setPublications(prev => prev.filter(pub => pub.id !== id));
+            setError(null);
+        } catch (err) {
+            setError(err.message);
+            alert('Gagal menghapus publikasi: ' + err.message);
+        }
     };
 
     return (
