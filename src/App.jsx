@@ -171,6 +171,7 @@ import Footer from "./Components/Footer";
 import LoginPage from "./Components/LoginPage";
 import EditPublicationPage from "./Components/EditPublicationPage";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import DetailPublicationPage from './pages/DetailPublicationPage';
 
 export default function App() {
   return (
@@ -179,17 +180,17 @@ export default function App() {
       <main className="p-4 sm:p-6 lg:p-8">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          <Route 
-            path="/publications" 
+          <Route
+            path="/publications"
             element={
               <ProtectedRoute>
-                <PublicationListPage />    
+                <PublicationListPage />
               </ProtectedRoute>
             }
           />
 
-          <Route 
-            path="/publications/add" 
+          <Route
+            path="/publications/add"
             element={
               <ProtectedRoute>
                 <AddPublicationPage />
@@ -201,6 +202,15 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <EditPublicationPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/publications/:id"
+            element={
+              <ProtectedRoute>
+                <DetailPublicationPage />
               </ProtectedRoute>
             }
           />
